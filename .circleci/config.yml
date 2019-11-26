@@ -17,8 +17,8 @@ jobs:
       - run: GO111MODULE=off go get golang.org/x/lint/golint
       - run: go vet -v $(go list ./... |grep -v 'vendor')
       - run: golint $(go list ./... |grep -v 'vendor')
-      - run: go test -cover $(go list ./... |grep -v 'vendor') -coverprofile=c.out
-      - run: go tool cover -html=c.out -o coverage.html
+      - run: go test -cover $(go list ./... |grep -v 'vendor') -coverprofile=coverage.out
+      - run: go tool cover -html=coverage.out -o coverage.html
       - store_artifacts:
           path: ./coverage.html
           destination: coverage.html
