@@ -30,6 +30,6 @@ jobs:
           failure_message: ':circleci-fail: $CIRCLE_BRANCH のデプロイが失敗しました\n:github_octocat: User：$CIRCLE_USERNAME'
           webhook: '${SLACK_ENDPOINT}'
       - run:
-          name: vuepress deploy
+          name: slack to coverage url
           command: |
-            curl -X POST --data-urlencode 'payload={"username": "circleCI", "text": "デプロイしました:<'https://${CIRCLE_BUILD_NUM}-224077321-gh.circle-artifacts.com/0/home/circleci/project/tomopict.report.html' | open report :earth_asia:>", "icon_emoji": ":ghost:"}' ${SLACK_ENDPOINT}
+            curl -X POST --data-urlencode 'payload={"username": "circleCI", "text": "カバレッジ結果はこちら:<'https://${CIRCLE_BUILD_NUM}-224077321-gh.circle-artifacts.com/0/coverage.html' | open report :earth_asia:>", "icon_emoji": ":ghost:"}' ${SLACK_ENDPOINT}
