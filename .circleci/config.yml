@@ -33,3 +33,7 @@ jobs:
           name: slack to coverage url
           command: |
             curl -X POST --data-urlencode 'payload={"username": "circleCI", "text": "カバレッジ結果はこちら:<'https://${CIRCLE_BUILD_NUM}-224077321-gh.circle-artifacts.com/0/coverage.html' | coverage.html :bow:>", "icon_emoji": ":ghost:"}' ${SLACK_ENDPOINT}
+      - run:
+          name: slack to coverage url
+          command: |
+            curl -X POST --data-urlencode 'payload={"username": "circleCI", "text": "codecov:<'https://codecov.io/gh/miyauchi-sup/codecov_test' | codecov :notebook_with_decorative_cover:>", "icon_emoji": ":ghost:"}' ${SLACK_ENDPOINT}
