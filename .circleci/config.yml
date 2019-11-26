@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  codecov: codecov/codecov@1.0.4
 jobs:
   build:
     docker:
@@ -20,3 +22,5 @@ jobs:
       - store_artifacts:
           path: ./coverage.html
           destination: coverage.html
+      - codecov/upload:
+          file: ./coverage.out
