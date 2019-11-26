@@ -15,11 +15,8 @@ jobs:
       - run: GO111MODULE=off go get golang.org/x/lint/golint
       - run: go vet -v $(go list ./... |grep -v 'vendor')
       - run: golint $(go list ./... |grep -v 'vendor')
-      - run: go get -v github.com/rubenv/sql-migrate/...
-      - run: mysql -h 127.0.0.1 -u root -e "CREATE DATABASE IF NOT EXISTS pocket_test DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_bin"
-      - run: sql-migrate up -env="circleci"
-      - run: mysql -h 127.0.0.1 -u root pocket_test < seeds/seed.sql
-      - run: go test -cover $(go list ./... |grep -v 'vendor')
-      - setup_remote_docker:
-          docker_layer_caching: true
-      - run: make docker/api/build
+      - run: go test -cover $(go list ./... |grep -v 'vendor') -coverprofile=c.out
+      - run: go tool cover -html=c.out -o coverage.html
+      - store_artifacts:
+          path: ./coverage.html
+          destination: coverage.html
